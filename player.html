@@ -1,0 +1,33 @@
+<!-- Custom HTML5 video player -->
+<div class="player-wrapper">
+  <video 
+    id="mainPlayer" 
+    class="video-player"
+    poster="thumbnail.jpg"
+    controls
+    preload="metadata"
+  >
+    <!-- Multiple formats for different browsers -->
+    <source src="movie.mp4" type="video/mp4">
+    <source src="movie.webm" type="video/webm">
+    <p>Your browser doesn't support video. 
+       <a href="movie.mp4">Download instead</a>
+    </p>
+  </video>
+</div>
+
+<style>
+  .player-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(229, 9, 20, 0.3);
+  }
+  
+  .video-player {
+    width: 100%;
+    display: block;
+    background: #000;
+  }
+</style>
