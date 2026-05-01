@@ -1,0 +1,604 @@
+/* ===========================
+   GLOBAL RESET & BASE STYLES
+   =========================== */
+
+/* Remove default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Better sizing behavior */
+}
+
+/* CSS Variables - Change colors here easily! */
+:root {
+  --primary: #e50914;        /* Netflix-style red */
+  --primary-glow: rgba(229, 9, 20, 0.5);
+  --bg-dark: #0a0a0a;        /* Almost black background */
+  --bg-card: rgba(255, 255, 255, 0.05); /* Glass card background */
+  --text-primary: #ffffff;   /* White text */
+  --text-secondary: #aaaaaa; /* Gray text */
+  --border: rgba(255, 255, 255, 0.1);
+  --font: 'Poppins', sans-serif;
+  --transition: all 0.3s ease; /* Reusable animation speed */
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* ===========================
+   NAVIGATION BAR
+   =========================== */
+
+.navbar {
+  position: fixed;          /* Stays at top when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;            /* Always on top of other elements */
+  padding: 15px 0;
+  transition: var(--transition);
+  
+  /* Glassmorphism navbar */
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Navbar becomes solid when you scroll down */
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.95);
+  padding: 10px 0;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;           /* Center the navbar content */
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--primary); /* "Cine" in red */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;         /* Remove bullet points */
+  gap: 30px;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: var(--transition);
+  position: relative;
+}
+
+/* Animated underline on hover */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: white;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%; /* Show underline */
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icon {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.nav-icon:hover {
+  color: var(--primary);
+}
+
+.btn-signin {
+  padding: 8px 25px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-signin:hover {
+  background: #ff1a1a;
+  box-shadow: 0 0 20px var(--primary-glow);
+  transform: translateY(-2px);
+}
+
+.hamburger {
+  display: none;           /* Hidden on desktop, shown on mobile */
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background: white;
+  transition: var(--transition);
+}
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;            /* Full screen height */
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+#hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;               /* Behind everything */
+}
+
+/* Dark gradient over the canvas so text is readable */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;                 /* Same as top:0 right:0 bottom:0 left:0 */
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.9) 40%,   /* Dark on left */
+    rgba(0,0,0,0.2) 100%   /* Transparent on right */
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;               /* Above the gradient */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite; /* Pulsing animation */
+}
+
+.hero-title {
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(to right, #e50914, #ff6b35, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 500px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Primary (red) button */
+.btn-primary {
+  padding: 16px 40px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 30px var(--primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 50px var(--primary-glow);
+}
+
+/* Secondary (glass) button */
+.btn-secondary {
+  padding: 16px 40px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+}
+
+.hero-meta {
+  display: flex;
+  gap: 15px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Scroll indicator arrow */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.scroll-arrow {
+  width: 30px;
+  height: 30px;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  animation: scrollBounce 1.5s infinite;
+}
+
+/* ===========================
+   MOVIE SECTIONS
+   =========================== */
+
+.movies-section,
+.live-section {
+  padding: 60px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.see-all {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.see-all:hover {
+  color: #ff4444;
+  letter-spacing: 1px;
+}
+
+/* Horizontally scrollable row */
+.movies-row,
+.channels-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;         /* Enable horizontal scroll */
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory; /* Smooth snapping */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+/* Custom scrollbar */
+.movies-row::-webkit-scrollbar {
+  height: 4px;
+}
+
+.movies-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.movies-row::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+/* ===========================
+   MOVIE CARD
+   =========================== */
+
+.movie-card {
+  min-width: 180px;         /* Card never gets smaller than this */
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition);
+  scroll-snap-align: start;
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  
+  /* Enable 3D transforms */
+  transform-style: preserve-3d;
+}
+
+.movie-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+              0 0 30px var(--primary-glow);
+  border-color: var(--primary);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.movie-card:hover img {
+  transform: scale(1.1); /* Zoom image on hover */
+}
+
+/* Play button overlay */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;              /* Hidden by default */
+  transition: var(--transition);
+}
+
+.movie-card:hover .card-overlay {
+  opacity: 1;              /* Show on hover */
+}
+
+.play-btn {
+  width: 60px;
+  height: 60px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 0 20px var(--primary-glow);
+  transform: scale(0.8);
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover .play-btn {
+  transform: scale(1);
+}
+
+.card-info {
+  padding: 12px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* "Movie Title..." if too long */
+}
+
+.card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-rating {
+  color: #ffd700; /* Gold for stars */
+}
+
+/* ===========================
+   CHANNEL CARD
+   =========================== */
+
+.channel-card {
+  min-width: 200px;
+  height: 120px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+}
+
+.channel-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 0 25px var(--primary-glow);
+}
+
+/* Live indicator dot */
+.live-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff0000;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.live-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: blink 1s infinite; /* Blinking dot */
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+
+.footer {
+  background: #050505;
+  border-top: 1px solid var(--border);
+  padding: 60px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* 3 columns */
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.footer-logo span {
+  color: var(--primary);
+}
+
+.footer-logo p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+.footer-links h4 {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: var(--transition);
+}
+
+.footer-links ul li a:hover {
+  color: var(--primary);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
