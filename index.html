@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- This makes the site work properly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineVerse - Watch Movies & Live TV</title>
+  
+  <!-- Google Fonts (free, beautiful fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Our CSS files -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION BAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        🎬 <span>Cine</span>Verse
+      </a>
+      
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="movie.html">Movies</a></li>
+        <li><a href="live-tv.html">Live TV</a></li>
+        <li><a href="search.html">Search</a></li>
+      </ul>
+      
+      <!-- Right side icons -->
+      <div class="nav-actions">
+        <a href="search.html" class="nav-icon">
+          <i class="fas fa-search"></i>
+        </a>
+        <button class="btn-signin">Sign In</button>
+      </div>
+      
+      <!-- Mobile hamburger menu -->
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION (Big Banner) ===== -->
+  <section class="hero" id="hero">
+    
+    <!-- 3D Background Canvas -->
+    <canvas id="hero-canvas"></canvas>
+    
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="hero-badge">🔥 NEW RELEASE</div>
+      <h1 class="hero-title">
+        Experience Cinema<br>
+        <span class="gradient-text">In 3D Dimensions</span>
+      </h1>
+      <p class="hero-description">
+        Stream thousands of movies and live TV channels in stunning quality.
+        Your entertainment universe starts here.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn-primary">
+          <i class="fas fa-play"></i> Watch Now
+        </button>
+        <button class="btn-secondary">
+          <i class="fas fa-info-circle"></i> More Info
+        </button>
+      </div>
+      <!-- Movie rating info -->
+      <div class="hero-meta">
+        <span>⭐ 9.2</span>
+        <span>|</span>
+        <span>2h 35m</span>
+        <span>|</span>
+        <span>Action • Sci-Fi</span>
+      </div>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+    
+  </section>
+
+  <!-- ===== TRENDING MOVIES SECTION ===== -->
+  <section class="movies-section" id="trending">
+    <div class="section-header">
+      <h2>🔥 Trending Now</h2>
+      <a href="movie.html" class="see-all">See All →</a>
+    </div>
+    
+    <!-- Movie Cards Row -->
+    <div class="movies-row" id="trending-row">
+      <!-- Cards are added by JavaScript (see main.js) -->
+    </div>
+  </section>
+
+  <!-- ===== LIVE TV SECTION ===== -->
+  <section class="live-section" id="live-tv">
+    <div class="section-header">
+      <h2>📺 Live TV Channels</h2>
+      <a href="live-tv.html" class="see-all">See All →</a>
+    </div>
+    
+    <div class="channels-row" id="channels-row">
+      <!-- Channel cards added by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ===== TOP RATED MOVIES ===== -->
+  <section class="movies-section" id="top-rated">
+    <div class="section-header">
+      <h2>⭐ Top Rated</h2>
+      <a href="movie.html" class="see-all">See All →</a>
+    </div>
+    <div class="movies-row" id="top-rated-row">
+      <!-- Cards added by JavaScript -->
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        🎬 <span>Cine</span>Verse
+        <p>Your Ultimate Entertainment Universe</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Movies</a></li>
+          <li><a href="#">Live TV</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">DMCA</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 CineVerse. Built with ❤️ for movie lovers.</p>
+    </div>
+  </footer>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- Our JavaScript files -->
+  <script src="js/movies-data.js"></script>
+  <script src="js/three-bg.js"></script>
+  <script src="js/main.js"></script>
+  
+</body>
+</html>
