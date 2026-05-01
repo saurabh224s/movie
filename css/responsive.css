@@ -1,0 +1,118 @@
+/* ===========================
+   RESPONSIVE DESIGN
+   This makes the site work on
+   phones and tablets too!
+   =========================== */
+
+/* 
+  Breakpoints:
+  Desktop: 1200px+
+  Tablet: 768px - 1199px
+  Mobile: under 768px
+*/
+
+/* --- TABLET STYLES --- */
+@media (max-width: 1199px) {
+  .hero-title {
+    font-size: 55px;
+  }
+  
+  .movies-section,
+  .live-section {
+    padding: 40px 30px;
+  }
+  
+  .footer-content {
+    padding: 0 30px;
+  }
+}
+
+/* --- MOBILE STYLES --- */
+@media (max-width: 768px) {
+  
+  /* Hide desktop nav links, show hamburger */
+  .nav-links {
+    display: none;            /* Hide links */
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 20px;
+    gap: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* Show nav when hamburger is clicked */
+  .nav-links.open {
+    display: flex;
+  }
+  
+  .hamburger {
+    display: flex;            /* Show hamburger button */
+  }
+  
+  /* Hero section on mobile */
+  .hero-title {
+    font-size: 38px;
+  }
+  
+  .hero-content {
+    padding: 0 20px;
+  }
+  
+  .hero-description {
+    font-size: 15px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;   /* Stack buttons vertically */
+    gap: 10px;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    font-size: 16px;
+    padding: 14px 30px;
+  }
+  
+  /* Sections on mobile */
+  .movies-section,
+  .live-section {
+    padding: 30px 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 22px;
+  }
+  
+  .movie-card {
+    min-width: 140px;
+  }
+  
+  .movie-card img {
+    height: 200px;
+  }
+  
+  /* Footer becomes single column on mobile */
+  .footer-content {
+    grid-template-columns: 1fr; /* 1 column instead of 3 */
+    padding: 0;
+  }
+  
+  .footer {
+    padding: 40px 20px;
+  }
+}
+
+/* --- VERY SMALL PHONES --- */
+@media (max-width: 400px) {
+  .hero-title {
+    font-size: 30px;
+  }
+  
+  .logo {
+    font-size: 22px;
+  }
+}
