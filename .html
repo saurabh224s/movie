@@ -1,0 +1,66 @@
+<!-- Add at the bottom of your HTML, before closing </body> -->
+
+<!-- Firebase SDK -->
+<script type="module">
+  // Import Firebase functions
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+  import { 
+    getFirestore, 
+    collection, 
+    getDocs,
+    addDoc 
+  } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+  
+  // Your Firebase config (get this from Firebase console)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_APP.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_APP.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  
+  // ---- LOAD MOVIES FROM FIRESTORE ----
+  async function loadMoviesFromDB() {
+    try {
+      const moviesCollection = collection(db, 'movies');
+      const snapshot = await getDocs(moviesCollection);
+      
+      const movies = [];
+      snapshot.forEach(function(doc) {
+        movies.push({ id: doc.id, ...doc.data() });
+      });
+      
+      console.log('Movies from database:', movies);
+      return movies;
+      
+    } catch (error) {
+      console.error('Error loading movies:', error);
+    }
+  }
+  
+  // ---- ADD A MOVIE TO FIRESTORE ----
+  async function addMovieToDB(movieData) {
+    try {
+      const docRef = await addDoc(collection(db, 'movies'), movieData);
+      console.log('Movie added with ID:', docRef.id);
+    } catch (error) {
+      console.error('Error adding movie:', error);
+    }
+  }
+  
+  // Load movies when page opens
+  loadMoviesFromDB();
+
+import firebase_admin
+from firebase_admin import credentials
+
+cred = credentials.Certificate("path/to/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
+</script>
